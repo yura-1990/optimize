@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -42,7 +41,7 @@ class PostController extends Controller
         //     });
 
         $posts = Cache::rememberForever('post-page-' . request('page', 1), function(){
-            return Post::query()->with('user')->orderBy('id')->paginate(56);
+            return Post::query()->with('user')->orderBy('id', 'DESC')->paginate(56);
         });
 
         return view('dashboard', compact('posts'));
@@ -53,9 +52,16 @@ class PostController extends Controller
         return view('posts.show', compact('post'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        Post::create([
+            'title' => 'Privet',
+            'content' => 'Privet privet',
+            'image' => 'img/1.webp',
+            'user_id' => auth()->id()
+        ]);
 
+        return redirect()->back();
     }
 
     public function update()

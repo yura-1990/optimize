@@ -6,6 +6,7 @@
     </x-slot>
 
     <div class="py-12 container mx-auto">
+    <a href="{{ route('post.create') }}">Add Post to check</a>
         <div class="post-grid">
             @foreach($posts as $item)
                 <a href="{{ route('post.show', ['post' => $item->id]) }}" class="border shadow">
