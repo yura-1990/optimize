@@ -6,16 +6,17 @@
     </x-slot>
 
     <div class="py-12 container mx-auto">
-        <div class="grid grid-rows-4 grid-flow-col gap-4">
-            @foreach($posts as $post)
-                <div class="border shadow">
-                    <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" class="w-full h-[400px] object-cover">
+        <div class="post-grid">
+            @foreach($posts as $item)
+                <a href="{{ route('post.show', ['post' => $item->id]) }}" class="border shadow">
+                    <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" class="w-full h-[400px] object-cover">
                     <div class="p-4">
-                        <p class="font-semibold text-[22px]">{{ $post->title }}</p>
-                        <p>{{ $post->content }}</p>
-                        <p class="font-semibold mt-4 flex justify-between">{{ $post->user->name }} <span>{{ $post->user->created_at }}</span></p>
+                        <p class="font-semibold text-[22px]">{{ $item->title }}</p>
+                        <p>{{ $item->content }}</p>
+                        <p class="font-semibold mt-4 flex justify-between">{{ $item->user->name }} <span>{{ $item->user->created_at }}</span></p>
                     </div>
-                </div>
+                </a>
+
             @endforeach
 
         </div>
